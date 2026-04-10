@@ -108,6 +108,7 @@ describe('ComputerDevice AppleScript security', () => {
     expect(mockState.execFileSync).toHaveBeenCalledWith('osascript', [
       '-e',
       expect.any(String),
+      payload,
     ]);
   });
 
@@ -117,7 +118,8 @@ describe('ComputerDevice AppleScript security', () => {
     expect(mockState.execSync).not.toHaveBeenCalled();
     expect(mockState.execFileSync).toHaveBeenCalledWith('osascript', [
       '-e',
-      'tell application "System Events" to keystroke "a\\"\\\\b"',
+      expect.any(String),
+      'a"\\b',
     ]);
   });
 });

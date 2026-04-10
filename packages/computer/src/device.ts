@@ -158,13 +158,13 @@ function sendKeyViaAppleScript(key: string, modifiers: string[] = []): void {
   if (keyCode !== undefined) {
     // Use key code for special keys
     script = `tell application "System Events" to key code ${keyCode}${modifierStr}`;
+    debugDevice('sendKeyViaAppleScript', { key, modifiers, script });
+    execFileSync('osascript', ['-e', script]);
   } else {
-    const escapedKey = key.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-    script = `tell application "System Events" to keystroke "${escapedKey}"${modifierStr}`;
+    script = `on run argv\n  tell application "System Events" to keystroke (item 1 of argv)${modifierStr}\nend run`;
+    debugDevice('sendKeyViaAppleScript', { key, modifiers, script });
+    execFileSync('osascript', ['-e', script, key]);
   }
-
-  debugDevice('sendKeyViaAppleScript', { key, modifiers, script });
-  execFileSync('osascript', ['-e', script]);
 }
 
 // Lazy load libnut with fallback
