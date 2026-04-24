@@ -163,7 +163,7 @@ async function createChatClient({
     ...(proxyAgent ? { fetchOptions: { dispatcher: proxyAgent as any } } : {}),
     ...openaiExtraConfig,
     ...(typeof timeout === 'number' ? { timeout } : {}),
-    dangerouslyAllowBrowser: true,
+    dangerouslyAllowBrowser: false,
   };
 
   const baseOpenAI = new OpenAI(openAIOptions);

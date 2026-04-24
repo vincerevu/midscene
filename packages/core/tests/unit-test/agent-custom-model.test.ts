@@ -375,7 +375,7 @@ describe('Agent with custom OpenAI client', () => {
       const clientOptions = {
         baseURL: planningConfig.openaiBaseURL,
         apiKey: planningConfig.openaiApiKey,
-        dangerouslyAllowBrowser: true,
+        dangerouslyAllowBrowser: false,
       };
 
       const planningClient = await planningConfig.createOpenAIClient!(
@@ -423,7 +423,7 @@ describe('Agent with custom OpenAI client', () => {
       const options = {
         baseURL: config.openaiBaseURL,
         apiKey: config.openaiApiKey,
-        dangerouslyAllowBrowser: true,
+        dangerouslyAllowBrowser: false,
       };
 
       await config.createOpenAIClient!(baseClient, options);
